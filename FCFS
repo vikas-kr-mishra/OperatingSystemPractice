@@ -1,0 +1,58 @@
+#include <iostream>
+
+using namespace std;
+
+struct node {
+    int id;
+    int arrival;
+    int burst;
+    int tat;
+    int wt;
+    struct node* next;
+} ;
+struct node* head;
+
+int main()
+{
+    int n;
+    cout<<"enter number of process: ";
+    cin>>n;
+    struct node* p[n];
+    for(int i=0;i<n;i++){
+        cout<<"Enter process id : ";
+        cin>>p[i]->id;
+        cout<<"Enter process burst time : ";
+        cin>>p[i]->burst;
+        cout<<"Enter process arrival time : ";
+        cin>>p[i]->arrival;
+        if(i==n-1){
+            p[i]->next=NULL;
+
+        }
+        else{
+            p[i]->next=p[i+1];
+        }
+    }
+    head=p[0];
+    int ct;
+    while (head->next!=NULL){
+            if(head->id==p[0]->id){
+                ct = p[0]->arrival + head->burst;
+                head->tat=ct-head->arrival;
+                head->wt=head->tat-head->burst;
+            }
+            else{
+                ct = ct + head->burst;
+                head->tat=ct-head->arrival;
+                head->wt=head->tat-head->burst;
+            }
+            head=head->next;
+    }
+
+        for(int i=0;i<n;i++){
+                cout<<"process " << i << " Turn around time : " << p[i]->tat;
+                cout<<"process " << i << " waiting time : " << p[i]->wt;
+        }
+
+    return 0;
+}
